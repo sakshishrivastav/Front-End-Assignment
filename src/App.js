@@ -1,25 +1,37 @@
-import logo from './logo.svg';
-import './App.css';
 
-function App() {
+import React from 'react';
+import Login from './Login';
+import Dashboard from './Dashboard';
+import { Layout } from 'antd';
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
+
+const { Content } = Layout;
+
+const App = () => {
+  const credentials = {
+    username: 'Sakshi',
+    password: 'Sakshi123',
+  };
+
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Layout>
+
+        <Content style={{ padding: '50px' }}>
+          <Routes>
+            <Route
+              path="/"
+              element={<div style={{ minHeight: '100vh' }}><Login credentials={credentials} /></div>}
+            />
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="*" element={<Navigate to="/" />} />
+          </Routes>
+        </Content>
+      </Layout>
+    </Router>
   );
-}
+};
 
 export default App;
